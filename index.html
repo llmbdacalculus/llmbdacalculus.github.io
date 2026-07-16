@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The LLMbda Calculus</title>
+<meta name="description" content="The LLMbda Calculus: AI Agents, Conversations, and Information Flow — a lambda calculus with machine-checked security theorems for LLM agents.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #555;
+    --accent: #0b5fa5;
+    --rule: #e0e0e0;
+    --code-bg: #f6f6f4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161a;
+      --fg: #e8e8e6;
+      --muted: #a0a0a0;
+      --accent: #6db3e8;
+      --rule: #33363c;
+      --code-bg: #1e2126;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 17px/1.65 Georgia, 'Times New Roman', serif;
+  }
+  main {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 3rem 1.25rem 4rem;
+  }
+  h1 {
+    font-size: 1.9rem;
+    line-height: 1.25;
+    margin: 0 0 0.75rem;
+  }
+  .authors {
+    font-size: 1.05rem;
+    margin: 0 0 0.35rem;
+  }
+  .venue {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin: 0 0 1.75rem;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0 0 2.25rem;
+    padding: 0;
+    list-style: none;
+    font-family: system-ui, sans-serif;
+    font-size: 0.9rem;
+  }
+  .links a {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .links a:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  h2 {
+    font-size: 1.15rem;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.3rem;
+    margin: 2.25rem 0 0.9rem;
+  }
+  p { margin: 0 0 1rem; }
+  a { color: var(--accent); }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 0.9rem 1rem;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+  footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>The LLMbda Calculus: AI&nbsp;Agents, Conversations, and Information&nbsp;Flow</h1>
+  <p class="authors">Zac Garby &middot; Andrew D. Gordon &middot; David Sands</p>
+  <p class="venue">arXiv:2602.20064 [cs.PL], 2026</p>
+
+  <ul class="links">
+    <li><a href="https://arxiv.org/abs/2602.20064">arXiv</a></li>
+    <li><a href="https://arxiv.org/pdf/2602.20064">PDF</a></li>
+    <li><a href="https://github.com/llmbdacalculus">Code</a></li>
+  </ul>
+
+  <h2>Abstract</h2>
+  <p>Large language models are increasingly deployed as agents: they plan, call
+  tools, read untrusted data, and act on the results. This exposes them to
+  prompt injection: data meant only to be read is obeyed as an instruction. The
+  most principled defences replace content inspection with provenance:
+  classifying data by source and keeping trusted and untrusted apart through a
+  separation of duty (the dual-LLM pattern) and information-flow control. Yet
+  the leading systems are hard to fully trust: flow tracking is easy to get
+  wrong, deliberate relaxations are hard to audit, and the dual-LLM pattern is
+  hard-wired into the architecture.</p>
+  <p>We present LLMbda, an untyped call-by-value lambda calculus that makes
+  provenance-based defence both expressible and provably sound, without
+  committing to an architecture. It adds the operational core of agentic
+  systems as first-class constructs: prompt-response conversations that can be
+  forked and cleared, code generation, and dynamic information-flow control in
+  which every value carries a label that every reduction propagates. Isolation
+  becomes a policy a program expresses, and reclassification an explicit,
+  auditable construct. Our central result is a termination-insensitive
+  probabilistic noninterference theorem over the whole calculus, including
+  code-generating agents, with an insulated variant that holds even when the
+  attacker chooses all untrusted inputs. The verified interpreter is itself the
+  harness that calls the model, to our knowledge the first LLM agent harness
+  whose executable is the subject of machine-checked security theorems, so
+  every agent inherits the guarantee. On the AgentDojo banking benchmark, an
+  agent built within LLMbda, enforcement always on, matches the utility of
+  CaMeL, a leading dual-LLM defence, run without its policy checks (which halve
+  its utility), and resists all but two of 1296 attacked runs. Our harness and
+  all proofs are in Lean.</p>
+
+  <h2>Citation</h2>
+  <pre>@misc{garby2026llmbda,
+  title         = {The {LLMbda} Calculus: {AI} Agents, Conversations, and Information Flow},
+  author        = {Zac Garby and Andrew D. Gordon and David Sands},
+  year          = {2026},
+  eprint        = {2602.20064},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.PL},
+  url           = {https://arxiv.org/abs/2602.20064}
+}</pre>
+
+  <footer>
+    <p><a href="https://github.com/llmbdacalculus">github.com/llmbdacalculus</a></p>
+  </footer>
+</main>
+</body>
+</html>
